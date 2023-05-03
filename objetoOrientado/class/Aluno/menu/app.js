@@ -71,46 +71,46 @@ const menu = [
     img: "./images/item-9.jpeg",
     desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
   },
+  {
+    id: 10,
+    title: "stack dinner",
+    category: "dinner",
+    price: 39.99,
+    img: "./images/item-10.jpeg",
+    desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+  },
 ];
+//array de objetos
 
 const  sectionCenter = document.querySelector('.section-center')//pegou os elementos que estavam dentro da section com essa classe.
 
 // console.log(sectionCenter)
 
+const container = document.querySelector('.btn-container') 
+
 //referencia aos botões html tudo de uma vez só
-const filterBtns = document.querySelectorAll('.filter-btn')
 
 window.addEventListener('DOMContentLoaded', function(){//uma função com um evento com a coisa o windom para que quando for carregada a pag gere esse comportamento
 
   // alert('oi')
   // console.log(menu)
   displayMenuItem(menu)
+  displayMenuButton()
+
 })
-//evento dos botões
-filterBtns.forEach((btn)=>{
-// console.log(btn)
-btn.addEventListener('click',function (e){
-  // console.log(e.currentTarget.dataset.id)
-  const category = e.currentTarget.dataset.id
-  //filtro para array para checar as palavras/função anonima de busca
-  const menuCategory = menu.filter(function(menuItem) {
-// console.log(menuItem.category)
-if(menuItem.category === category){
-  return menuItem
-}
-  })
-  console.log(menuCategory)
-})
-})
+//a função filter vai filtra as info
+
+//evento dos botões gerais de forma ind no menu
 
 
-
-//função para refatorar o código
+//função para refatorar o código..
 
 function displayMenuItem(menuItems){
-  let displayMenu = menuItems.map(function(item){//usou essa função para um retorno do html do article da section selecionada,e usou do metodo para percorrer o array e buscar os items que sinalizam cada class e faz isso nove vezes pela quantidade de coisa do array.
+  let displayMenu = menuItems.map(function(item){//usou essa função(map) para um retorno do html do article da section selecionada,e usou do metodo para percorrer o array e buscar os items que sinalizam cada class e faz isso nove vezes pela quantidade de coisa do array.
 
     // console.log(item)
+
+    //mesmo se o elemento escolhido e colocado no js for comentado no html,ele ainda irá funcionar pois seu html foi levado pro js e transformado atraves dele em html novamente.
     return `   <article class="menu-item">
     <img src=${item.img} class="photo" alt=${item.title}>
     
@@ -122,15 +122,78 @@ function displayMenuItem(menuItems){
     </header>
     
     <p class="item-text">
-     ${item.desc}
+     ${item.desc} 
     </p>
     </div>
-    </article>`//usou parapoder concatenar o negócio lá
+    </article>`//usou parapoder concatenar o negócio lá;
+    // o ${item.tata} é usado para buscar aquele elemento com aquela classe dentro do array.
     })
     displayMenu = displayMenu.join("")//vai transformar tudo em um texto como no html,apagando virgulas e aspas.
     
     // console.log(displayMenu)
-    //tranforma o texto para o html
+    //tranforma o texto para o html.
     
-    sectionCenter.innerHTML = displayMenu// essa propriedade vai pegar todo o texto e transformar em html 
+    sectionCenter.innerHTML = displayMenu// essa propriedade vai pegar todo o texto e transformar em html .
+}
+
+//função para os botões funcionarem em um servidor remoto
+function displayMenuButton(){
+// vai ser referente aos botões
+
+//criar botões
+
+//botões pelo js
+//reduce-costuma ser um,a var acumuladora,no caso ela é um tiipo de array-ele percorre o array,buscar os elementos e acumular as informações para listar-los,atraves de parametros/só recebe um parametro que é a função anônima.
+
+//essa var vai mexer com array
+  const categories = menu.reduce(function(values,item){
+    if(!values.includes(item.category)){
+  values.push(item.category)
+    }
+  return values//mas nesse caso só trousse o retorno de uma categoria
+  },['all'])//terá de passar coisas dentro para fazer os procedimentos
+  console.log(categories)
+  
+  const categoryBtns = categories.map((category)=>{
+    return `<button class="filter-btn" type="button" data-id=${category}>${category}</button>`
+  }).join("")
+  
+  container.innerHTML = categoryBtns
+  
+  console.log(categoryBtns)
+  
+  //referência dos botões
+  const filterBtns = document.querySelectorAll('.filter-btn')//referenciando todos os btns com essa classe em forma de lista,que vai pra array com vetor
+
+  //ação aos botões
+  filterBtns.forEach((btn)=>{//o forEach vai listar todos od btns
+    // console.log(btn)
+    //evento do botão
+    btn.addEventListener('click',function (e){
+      // console.log(e.currentTarget.dataset.id)-vai retornar o btn com o valor colocado.
+      const category = e.currentTarget.dataset.id//-indentificação ind de cada btn.
+      //filtro para array para checar as palavras/função anonima de busca.
+      const menuCategory = menu.filter(function(menuItem) {//vai pegar as info do array menu e verifica-las,no caso se as info vai ser como no item que clicou,e se forem condizentes seram mostradas no console.
+    
+    // console.log(menuItem.category)
+    if(menuItem.category === category){//pesquisa dentro do array,para verificar e mostrar na pag aquela que é igual  a do  botão clicado.
+      return menuItem
+    }
+      })
+      //vai expressar no console os array de categoria presentes nos itens do array.
+      console.log(menuCategory)
+    
+      //filtro baseado no click do usuário.
+    
+      //se a categoria for igual a info/palavra ela será mostrada.
+    
+      //caso do all
+      if(category === "all"){
+    displayMenuItem(menu)//para retornar todo o array criado lá em cima(o array completo dos objetos.
+      }//caso não for
+      else{
+        displayMenuItem(menuCategory)//caso não ,vai retornar o valor de acordo com categoria. No caso café damanhã = café da manhã etc.(no sentido dele clicar em um botão diferente de "all").
+      }
+    })
+    })
 }

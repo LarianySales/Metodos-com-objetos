@@ -1,63 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valendo</title>
 </head>
+
 <body>
     <script>
-//Criação de objeto com chave/valor - o obj é dinâmico
-const produto = new Object//-propriedade-chave-valor
-//ADICIONAR PROPRIEDADES SEM PRECISAR DECLARAR
-produto.nome = 'Cadeira'
-produto['marca produto'] = 'Genérica'
-produto.preco = 200
-console.log(produto)
+        //Criação de objeto com chave/valor - o obj é dinâmico
+        const produto = new Object//-propriedade-chave-valor
+        //ADICIONAR PROPRIEDADES SEM PRECISAR DECLARAR
+        produto.nome = 'Cadeira'
+        produto['marca produto'] = 'Genérica'
+        produto.preco = 200
+        console.log(produto)
 
-//remover propriedade
-delete produto.preco
-delete produto['marca produto']
-console.log(produto)
-    
-//fazer analogia de como mandar dados para o bando de dados e receber dados do bando de dados.
+        //remover propriedade
+        delete produto.preco
+        delete produto['marca produto']
+        console.log(produto)
 
-const carro = {
-    // para atribui o valor dentro da propriedade do obj
-    //caracteristicas do objeto
-    modelo: 'A4',
-    valor: 89000,
+        //fazer analogia de como mandar dados para o bando de dados e receber dados do bando de dados.
 
-    //propriedade3 com chave e valor
+        const carro = {
+            // para atribui o valor dentro da propriedade do obj
+            //caracteristicas do objeto
+            modelo: 'A4',
+            valor: 89000,
 
-    propietario:{
-        nome: 'João',
-        idade: 58,
-        // endereco://atributo composto por ter mais de uma infomação para identifica-lo
-        endereco:{
-            logradouro: 'Rua capeta',
-            numero:1234,
-        },
-    },//por ser necessário atribuir certas informações dentro da propriedade
-    condutores:[{
-        nome:'Cátia',
-        idade:19,
-    },{//segundo condutor
-nome:'Arnaldo',
-idade:34,
-    }],//com um array para ter objetos 
+            //propriedade3 com chave e valor
 
-    calcularValorSeguro(){
-        //
-    }
-}
-console.log(carro.propietario.nome)//para identificar uma propriedade e dentro dela sua caracteristica escolhida
-console.log(carro.propietario.endereco.logradouro)//para identificar uma propriedade e dentro dela sua caracteristica escolhida e se houver mais caracteristica dentro tbm identifica-la
-console.log(carro.condutores[0].nome)//para identificar dentro do objeto um array e segue com o ponto para identificar dentro do array uma caracteristica da propriedade
-console.log(carro.condutores.forEach((nome) => {// listar de uma vez só as caracteristicas semelhantes de dois obj em um array
-    console.log(nome)//deu underfined por ser ultimo valor e não tem,no caso a ultima propriedade
-}))
+            propietario: {
+                nome: 'João',
+                idade: 58,
+                // endereco://atributo composto por ter mais de uma infomação para identifica-lo
+                endereco: {//é um valor multivalorado-mais informações dentro
+                    logradouro: 'Rua capeta',
+                    numero: 1234,
+                },
+            },//por ser necessário atribuir certas informações dentro da propriedade
+            condutores: [{//valores dinâmicos
+                nome: 'Cátia',
+                idade: 19,
+            }, {//segundo condutor
+                nome: 'Arnaldo',
+                idade: 34,
+            }],//com um array para ter objetos 
+
+            calcularValorSeguro() {
+                //
+            }
+        }
+        console.log(carro.propietario.nome)//para identificar uma propriedade e dentro dela sua caracteristica escolhida
+        console.log(carro.propietario.endereco.logradouro)//para identificar uma propriedade e dentro dela sua caracteristica escolhida e se houver mais caracteristica dentro tbm identifica-la
+        console.log(carro.condutores[0].nome)//para identificar dentro do objeto um array(dentro dele o indice), e segue com o ponto para identificar dentro do array uma caracteristica da propriedade
+        console.log(carro.condutores.forEach((nome) => {// listar de uma vez só as caracteristicas semelhantes de dois obj em um array
+            console.log(nome)//deu underfined por ser ultimo valor e não tem,no caso a ultima propriedade
+        }))
     </script>
 </body>
+
 </html>
